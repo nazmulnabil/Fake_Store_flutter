@@ -12,7 +12,7 @@ class ProductModel extends Product {
     String? description,
     String? category,
     String? image,
-    Rating? rating})
+    RatingModel? rating})
       :super(id: id,title: title,price: price,
             description: description,category: category,
             image:image);
