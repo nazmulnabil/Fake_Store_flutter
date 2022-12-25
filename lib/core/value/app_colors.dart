@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const Color pageBackground = Color(0xFFE5E5E5);
+  static const Color colorTransparent = Colors.transparent;
+  static const Color colorRating = Color.fromARGB(255, 202, 184, 20);
   static const Color lightPinkColor = Color(0xFFFFBFDD);
   static const Color productDescriptionTextColor = Color(0xFF323232);
   static const Color textfieldSearchIconColor = Color(0xFFA7A7A7);

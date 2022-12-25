@@ -30,7 +30,7 @@ class _ProductListState extends State<ProductList> {
     return  GridView.builder(
         gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
 
-            crossAxisSpacing: 20,
+          //  crossAxisSpacing: 0,
             mainAxisSpacing: 20,
             crossAxisCount: 2),
         itemCount:widget.items.length,

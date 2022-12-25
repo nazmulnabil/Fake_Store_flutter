@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class App extends StatelessWidget {
-   App({Key? key,required this.getProducts }) : super(key: key);
+   const App({Key? key,required this.getProducts }) : super(key: key);
 
 final GetProducts getProducts;
 
@@ -23,14 +23,9 @@ final GetProducts getProducts;
           ),
 
         ],
-        child: GestureDetector(
-          onTap: () {
-            FocusManager.instance.primaryFocus?.unfocus();
-          },
-          child: const MaterialApp(
-            debugShowCheckedModeBanner: false,
-             home: HomePage(),
-          ),
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+           home: HomePage(),
         ),
       )
    ;

@@ -4,6 +4,13 @@ import 'app_colors.dart';
 
 
 
+
+const appBarTitleStyle = TextStyle(
+   // fontSize: 16,
+    fontWeight: FontWeight.w600,
+    height: 1.25,
+    color: AppColors.blackTextColor);
+
 const errorTextStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w400,
