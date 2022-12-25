@@ -1,6 +1,6 @@
 part of 'products_bloc.dart';
 
-@immutable
+
 abstract class ProductsState extends Equatable {
   @override
   List<Object> get props => [];
@@ -9,7 +9,7 @@ abstract class ProductsState extends Equatable {
 class ProductsStateLoading extends ProductsState {}
 
 class ProductsStateSuccess extends ProductsState {
-   ProductsStateSuccess(this.items);
+   ProductsStateSuccess({required this.items});
 
   final List<ProductModel> items;
 

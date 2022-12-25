@@ -1,9 +1,9 @@
-import 'package:fake_store_flutter/features/home/domain/entities/rating.dart';
 
-class RatingModel extends Rating{
+
+class RatingModel{
   RatingModel({
       double? rate,
-      int? count,}):super(rate:rate,count: count);
+      int? count,}) ;
 
   RatingModel.fromJson(dynamic json) {
     rate = json['rate'];

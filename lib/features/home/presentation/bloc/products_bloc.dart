@@ -41,10 +41,10 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     emit(ProductsStateLoading());
 
     try {
-      final products = await getProducts();
-      // final products=await getProducts.call();
-
-      emit(ProductsStateSuccess(products));
+    //  final products = await getProducts();
+       List<ProductModel> products=await getProducts();
+          print("inside bloc products >>>>>>>>>>>>>>>>>>>>>>>> $products");
+      emit(ProductsStateSuccess(items: products));
     } catch (error) {
       emit(error is ProductsStateError
           ? ProductsStateError(error.error)
