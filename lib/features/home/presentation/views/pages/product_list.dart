@@ -28,11 +28,11 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
 
     return  GridView.builder(
-        gridDelegate:  const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            childAspectRatio: 2 /3.25,
+        gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
+
             crossAxisSpacing: 20,
-            mainAxisSpacing: 15),
+            mainAxisSpacing: 20,
+            crossAxisCount: 2),
         itemCount:widget.items.length,
         itemBuilder: (BuildContext ctx, index) {
 

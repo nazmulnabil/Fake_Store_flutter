@@ -11,12 +11,18 @@ import 'package:fake_store_flutter/features/home/domain/repositories/product_rep
 import 'package:fake_store_flutter/features/home/presentation/bloc/products_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'core/network/network_info.dart';
 import 'features/home/domain/usecases/get_products.dart';
 
 
 final locator = GetIt.instance;
 
 void init() {
+
+  ///core
+  locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(InternetConnectionChecker() ));
+
 
   ///data source
   locator.registerLazySingleton<ProductsRemoteDataSource>(
@@ -28,15 +34,17 @@ void init() {
 
   ///repositories
   locator.registerLazySingleton<ProductsRepository>(
-        () => ProductsRepositoryImpl(locator.get<ProductsRemoteDataSource>(),
-            locator.get<ProductsCache>()),);
+        () => ProductsRepositoryImpl(
+            locator.get<ProductsRemoteDataSource>(),
+            locator.get<ProductsCache>(),
+            locator.get<NetworkInfo>()) );
 
 
   ///use cases
   locator.registerLazySingleton<GetProducts>(
           () => GetProducts(locator.get<ProductsRepository>()));
 
-  //bloc
+  ///bloc
   locator.registerFactory(() => ProductsBloc(locator.get<GetProducts>()));
 
 }

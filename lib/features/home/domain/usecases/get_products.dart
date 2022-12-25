@@ -1,4 +1,6 @@
 
+import 'package:dartz/dartz.dart';
+import 'package:fake_store_flutter/core/error%20handling/failures.dart';
 import 'package:fake_store_flutter/features/home/data/models/product_model.dart';
 import 'package:fake_store_flutter/features/home/domain/repositories/product_repository.dart';
 
@@ -9,7 +11,7 @@ class GetProducts{
 
   GetProducts( this._productsRepository);
 
-  Future<List<ProductModel>> call () async{
+  Future<Either<Failure, List<ProductModel>>> call () async{
      // call function content
     return await  _productsRepository.getProducts();
   }

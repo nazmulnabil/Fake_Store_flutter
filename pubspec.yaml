@@ -46,6 +46,10 @@ dependencies:
   dio: ^4.0.6
   bloc_concurrency: ^0.2.0
   hive_flutter: ^1.1.0
+  dartz: ^0.10.1
+  internet_connection_checker: ^1.0.0+1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

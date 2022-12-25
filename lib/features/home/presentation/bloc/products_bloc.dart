@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:fake_store_flutter/core/error%20handling/failures.dart';
 import 'package:fake_store_flutter/features/home/data/models/product_model.dart';
 import 'package:fake_store_flutter/features/home/domain/usecases/get_products.dart';
 
@@ -40,15 +42,23 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       Emitter<ProductsState> emit) async {
     emit(ProductsStateLoading());
 
-    try {
-    //  final products = await getProducts();
-       List<ProductModel> products=await getProducts();
-          print("inside bloc products >>>>>>>>>>>>>>>>>>>>>>>> $products");
-      emit(ProductsStateSuccess(items: products));
-    } catch (error) {
-      emit(error is ProductsStateError
-          ? ProductsStateError(error.error)
-          : ProductsStateError('something went wrong'));
-    }
+    final result = await getProducts();
+    result.fold(
+            (failure) => emit(ProductsStateError(failure.message)),
+            (products) {
+          emit(ProductsStateSuccess(items:products ));
+        }
+    );
+
+    // try {
+    // //  final products = await getProducts();
+    //    Either<Failure, List<ProductModel>> products=await getProducts();
+    //       print("inside bloc products >>>>>>>>>>>>>>>>>>>>>>>> $products");
+    //   emit(ProductsStateSuccess(items: products));
+    // } catch (error) {
+    //   emit(error is ProductsStateError
+    //       ? ProductsStateError(error.error)
+    //       : ProductsStateError('something went wrong'));
+    // }
   }
 }

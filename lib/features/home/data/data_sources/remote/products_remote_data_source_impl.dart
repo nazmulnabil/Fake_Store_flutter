@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fake_store_flutter/core/error%20handling/exceptions.dart';
 import 'package:fake_store_flutter/core/network/api_contants.dart';
 import 'package:fake_store_flutter/core/network/dio_client.dart';
 import 'package:fake_store_flutter/features/home/data/data_sources/remote/products_remote_data_source.dart';
@@ -19,7 +20,6 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource{
   Future<List<ProductModel>> getProducts() async{
     print("getProducts >>>>>>>>>>>>>>>>>>>>> inside remote data source");
     List<ProductModel> productsList=<ProductModel>[];
-   try {
     final Response response=await _dioProvider.client.get(Endpoints.productsUrl);
     print("products respons json>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ${response.data}");
     if(response.statusCode==200){
@@ -34,15 +34,20 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource{
           print("after parsing>>>>>>>>>>>>>>>>>");
 
           print("after parsing>>>>>>>>>>>>>>>>>$productsList");
+
+          return productsList;
+
+    } else {
+      throw ServerException();
     }
 
 
-    return productsList;
-   } on DioError catch (e) {
-     print('exception inside dio error >>>>>>> $e');
-     final errorMessage = DioExceptions.fromDioError(e).toString();
-     throw errorMessage;
-   }
+
+   // on DioError catch (e) {
+   //   print('exception inside dio error >>>>>>> $e');
+   //   final errorMessage = DioExceptions.fromDioError(e).toString();
+   //   throw errorMessage;
+   // }
   }
 
 }

@@ -1,5 +1,6 @@
 import 'package:fake_store_flutter/features/home/presentation/bloc/products_bloc.dart';
 import 'package:fake_store_flutter/features/home/presentation/views/pages/product_list.dart';
+import 'package:fake_store_flutter/features/home/presentation/views/widgets/bottom_loader.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,7 @@ class _ProductListView extends StatelessWidget {
       builder: (context, state) {
 
         if (state is ProductsStateLoading) {
-          return const CircularProgressIndicator();
+          return  Loader();
         }
         if (state is ProductsStateError) {
           return Text(state.error);
