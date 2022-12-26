@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fake_store_flutter/core/value/text_styles.dart';
 import 'package:fake_store_flutter/features/details/presentation/views/pages/product_details_page.dart';
 import 'package:fake_store_flutter/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,6 @@ class ProductListItem extends StatelessWidget {
                       image: imageProvider,
                       fit: BoxFit.contain,
 
-                      // colorFilter: const ColorFilter.mode(Colors.white, BlendMode.colorBurn)
                     ),
                   ),
                 ),
@@ -72,10 +72,7 @@ class ProductListItem extends StatelessWidget {
               '\$${item.price}',
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
-              style: const TextStyle(
-                  color: Color.fromARGB(
-                      255, 253, 104, 104),
-                  fontWeight: FontWeight.w600),
+              style:itemPriceTextStyle,
             ),
             const SizedBox(
               height: 10,

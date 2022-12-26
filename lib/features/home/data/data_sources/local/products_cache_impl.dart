@@ -1,3 +1,4 @@
+import 'package:fake_store_flutter/core/value/strings.dart';
 import 'package:fake_store_flutter/features/home/data/data_sources/local/products_cache.dart';
 import 'package:hive/hive.dart';
 
@@ -12,8 +13,7 @@ class ProductsCacheImpl implements ProductsCache{
   @override
   getProductsCache()async {
     // TODO: implement get
-    print('inside get method');
-    final encodedJson = _box.get('model_key');
+    final encodedJson = _box.get(AppStrings.localStorageKeyText);
     final model =productModelFromJson(encodedJson);
     return model;
   }
@@ -21,9 +21,7 @@ class ProductsCacheImpl implements ProductsCache{
   @override
   setProductsCache({required List<ProductModel> products}) async{
     // TODO: implement set
-    print('inside save method');
-    await _box.put('model_key',productModelToJson(products));
-
+    await _box.put(AppStrings.localStorageKeyText,productModelToJson(products));
   }
 
 }

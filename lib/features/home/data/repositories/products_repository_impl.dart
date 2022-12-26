@@ -1,12 +1,7 @@
 
-
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:fake_store_flutter/core/error%20handling/exceptions.dart';
 import 'package:fake_store_flutter/core/error%20handling/failures.dart';
-import 'package:fake_store_flutter/core/network/dio_exceptions.dart';
 import 'package:fake_store_flutter/core/network/network_info.dart';
 import 'package:fake_store_flutter/features/home/data/data_sources/local/products_cache.dart';
 import 'package:fake_store_flutter/features/home/data/data_sources/remote/products_remote_data_source.dart';
@@ -24,7 +19,6 @@ class ProductsRepositoryImpl implements ProductsRepository{
   @override
   Future<Either<Failure, List<ProductModel>>> getProducts() async {
 
-    print("inside products repository >>>>>>>>>>>>>>>>>>>>>>>> ");
     // TODO: implement getProducts
 
 
@@ -33,11 +27,28 @@ class ProductsRepositoryImpl implements ProductsRepository{
         final products = await _productsRemoteDataSource.getProducts();
         await _productsCache.setProductsCache(products: products);
         return Right(products);
-          } on ServerException {
-             return const Left(ServerFailure(''));
-          } on TlsException catch (e) {
-             return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
+          } on BadRequestException catch (e){
+             return  Left(ServerFailure(e.message));
           }
+           on InternalServerErrorException catch (e){
+        return  Left(ServerFailure(e.message));
+      }
+      on ConflictException catch (e){
+        return  Left(ServerFailure(e.message));
+      }
+      on UnauthorizedException catch (e){
+        return  Left(ServerFailure(e.message));
+      }
+      on NotFoundException catch (e){
+        return  Left(ServerFailure(e.message));
+      }
+      on NoInternetConnectionException catch (e){
+        return  Left(ServerFailure(e.message));
+      }
+      on DeadlineExceededException catch (e){
+        return  Left(ServerFailure(e.message));
+      }
+
      } else{
       try{
         final cachedProducts = _productsCache.getProductsCache();

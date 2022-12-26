@@ -1,6 +1,9 @@
 import 'package:fake_store_flutter/core/value/app_colors.dart';
+import 'package:fake_store_flutter/core/value/app_values.dart';
 import 'package:fake_store_flutter/core/value/strings.dart';
+import 'package:fake_store_flutter/core/value/text_styles.dart';
 import 'package:fake_store_flutter/core/value/themes.dart';
+import 'package:fake_store_flutter/features/details/presentation/views/widgets/product_image_widget.dart';
 import 'package:fake_store_flutter/features/home/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -17,29 +20,17 @@ class ProductDetailsPage extends StatelessWidget {
           backgroundColor: AppColors.colorWhite,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            elevation: 0,
+            elevation: AppValues.appBarElevation,
             iconTheme: iconThemeData,
             centerTitle: true,
             title: const Text(
               AppStrings.productDetailsText,
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+              style: productDetailsTextStyle,
             ),
           ),
           body: Column(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 140,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(product.image!),
-                            fit: BoxFit.contain)),
-                  ),
-                ),
-              ),
+              ProductImage(product),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
@@ -49,10 +40,7 @@ class ProductDetailsPage extends StatelessWidget {
                       product.title!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w800),
+                      style: productTitleTextStyle,
                     ),
                     const SizedBox(
                       height: 5,
@@ -62,10 +50,7 @@ class ProductDetailsPage extends StatelessWidget {
                       children: [
                         Text(
                           product.category!.toString(),
-                          style: const TextStyle(
-                              color: Colors.black45,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w800),
+                          style: categoryTextStyle,
                         ),
                         Row(
                           children: [
@@ -75,20 +60,14 @@ class ProductDetailsPage extends StatelessWidget {
                             ),
                             Text(
                               product.rating!.rate.toString(),
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600),
+                              style: ratingBarTextStyle,
                             ),
                             const SizedBox(
                               width: 10,
                             ),
                             Text(
                               '(${product.rating!.count} ${AppStrings.reviewsText})',
-                              style: const TextStyle(
-                                  color: Colors.black45,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                              style:ratingCountTextSTyle,
                             ),
                           ],
                         ),
@@ -101,10 +80,7 @@ class ProductDetailsPage extends StatelessWidget {
                       AppStrings.informationText,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                      style: informationTextStyle,
                     ),
                     const SizedBox(
                       height: 10,
@@ -113,10 +89,7 @@ class ProductDetailsPage extends StatelessWidget {
                       product.description!,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 7,
-                      style: const TextStyle(
-                          color: Colors.black45,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
+                      style:productDescriptionTextStyle,
                     ),
                   ],
                 ),
@@ -133,24 +106,18 @@ class ProductDetailsPage extends StatelessWidget {
                           '\$ ${product.price!}',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 23,
-                              fontWeight: FontWeight.w800),
+                          style: priceTextStyle,
                         ),
                         Container(
                           alignment: Alignment.center,
-                          color: const Color(0xff0F172A),
+                          color: AppColors.addToCartButtonColor,
                           child: const Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 25, vertical: 10),
                             child: Text(AppStrings.addToCartText,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600)),
+                                style:addToCartButtonTextStyle),
                           ),
                         )
                       ]),
