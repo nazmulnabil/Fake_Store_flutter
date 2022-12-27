@@ -14,7 +14,7 @@ This is simple e commerce flutter application which has two screens- Homepage,Pr
 
 State Management System -> Bloc[Business logic component ...
 
-This is a flutter application where products are fetched from fakestoreapi.com.
+This is a flutter application where products are fetched from fakestoreapi.com API.
 
 In the app the clean architecture is maintained...So there is  seperation of concerns.
 The app is mainly architected into three layers..
